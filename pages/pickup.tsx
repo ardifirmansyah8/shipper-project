@@ -2,12 +2,12 @@ import { NextPage } from "next";
 
 import Layout from "../components/Layout";
 
-const IndexPage: NextPage = () => {
+const PickupPage: NextPage = () => {
   return (
     <Layout>
-      <div>Beranda</div>
+      <div>Pickup</div>
     </Layout>
   );
 };
 
-export default IndexPage;
+export default PickupPage;
