@@ -28,24 +28,24 @@ const DriverManagementPage: NextPage = () => {
   };
 
   const emptySearch = () => {
-      setSearch("");
-      searchDriver("")
-  }
+    setSearch("");
+    searchDriver("");
+  };
 
   return (
     <Layout>
       <>
-        <div className="mb-8 flex w-full justify-between border border-gray-300 bg-white px-8 py-4 drop-shadow-md">
-          <div>
-            <div className="text-3xl font-bold text-red-500">
+        <div className="mb-8 flex w-full flex-col justify-between border border-gray-300 bg-white px-8 py-4 drop-shadow-md lg:flex-row">
+          <div className="mb-4 lg:mb-0">
+            <div className="text-xl font-bold text-red-500 lg:text-3xl">
               DRIVER MANAGEMENT
             </div>
-            <div className="text-sm text-gray-500">
+            <div className="text-xs text-gray-500 lg:text-sm">
               Data driver yang bekerja sama dengan Anda
             </div>
           </div>
-          <div className="flex items-center">
-            <div className="relative mr-4 border border-gray-300 pl-10 pr-10">
+          <div className="flex flex-col items-center lg:flex-row">
+            <div className="relative mb-4 w-full border border-gray-300 pl-10 pr-10 lg:mr-4 lg:mb-0 lg:w-auto">
               <SearchIcon className="absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 transform text-red-500" />
               <input
                 placeholder="Cari driver"
@@ -61,7 +61,7 @@ const DriverManagementPage: NextPage = () => {
                 />
               )}
             </div>
-            <button className="flex h-10 w-auto items-center border-b-2 border-red-700 bg-red-500 p-2 text-xs font-bold text-white hover:bg-red-300">
+            <button className="flex h-10 w-full items-center border-b-2 border-red-700 bg-red-500 p-2 text-xs font-bold text-white hover:bg-red-300 lg:w-auto">
               <span>TAMBAH DRIVER</span>
               <PlusIcon className="ml-2 h-4 w-4 text-white" />
             </button>
@@ -74,14 +74,14 @@ const DriverManagementPage: NextPage = () => {
 
         {!isLoading && (
           <>
-            <div className="scrolling-wrapper flex flex-nowrap gap-16 overflow-x-auto py-4">
+            <div className="scrolling-wrapper flex flex-col flex-wrap gap-16 py-4 lg:flex-row lg:flex-nowrap lg:overflow-x-auto">
               {users.map((user, index) => (
                 <div
                   key={index}
-                  className="w-64 rounded border border-gray-300 bg-white drop-shadow-md"
+                  className="w-full rounded border border-gray-300 bg-white drop-shadow-md lg:w-72"
                 >
-                  <div className="flex w-full justify-between border-b-4 border-gray-200 p-3">
-                    <div className="w-40 truncate text-gray-400">
+                  <div className="lg-w-64 flex w-full justify-between border-b-4 border-gray-200 p-3">
+                    <div className="lg:w-54 w-full truncate text-gray-400">
                       Driver ID:{" "}
                       <span className="text-red-500">
                         {user.id.value || "-"}
@@ -89,41 +89,45 @@ const DriverManagementPage: NextPage = () => {
                     </div>
                     <DotsHorizontalIcon className="h-7 w-7 cursor-pointer text-gray-300" />
                   </div>
-                  <div className="w-full p-3">
+                  <div className="flex w-full items-center justify-center p-3 lg:block lg:w-72">
                     {user.picture.medium ? (
                       <img
                         src={user.picture.medium}
-                        width={72}
-                        height={72}
-                        className="mb-6 rounded"
+                        className="mb-6 w-32 rounded lg:w-auto"
                       />
                     ) : (
                       <UserCircleIcon className="mb-6 h-24 w-24 text-gray-300" />
                     )}
-                    <div className="mb-4">
-                      <div className="text-sm text-gray-500">Nama Driver</div>
-                      <div>
-                        {user.name.first} {user.name.last}
+                    <div className="ml-4 lg:ml-0">
+                      <div className="mb-4">
+                        <div className="text-sm text-gray-500">Nama Driver</div>
+                        <div>
+                          {user.name.first} {user.name.last}
+                        </div>
                       </div>
-                    </div>
-                    <div className="mb-4">
-                      <div className="text-sm text-gray-500">Telepon</div>
-                      <div>{user.phone}</div>
-                    </div>
-                    <div className="mb-4">
-                      <div className="text-sm text-gray-500">Email</div>
-                      <div className="w-64 truncate">{user.email}</div>
-                    </div>
-                    <div>
-                      <div className="text-sm text-gray-500">Tanggal Lahir</div>
-                      <div>{format(new Date(user.dob.date), "dd-mm-yyyy")}</div>
+                      <div className="mb-4">
+                        <div className="text-sm text-gray-500">Telepon</div>
+                        <div>{user.phone}</div>
+                      </div>
+                      <div className="mb-4 hidden lg:block">
+                        <div className="text-sm text-gray-500">Email</div>
+                        <div className="w-64 truncate">{user.email}</div>
+                      </div>
+                      <div className="hidden lg:block">
+                        <div className="text-sm text-gray-500">
+                          Tanggal Lahir
+                        </div>
+                        <div>
+                          {format(new Date(user.dob.date), "dd-mm-yyyy")}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="mt-16 flex justify-center">
+            <div className="mt-16 flex justify-center pb-16 lg:pb-0">
               <div className="flex w-96 justify-between">
                 <div
                   className={`flex items-center text-lg ${
